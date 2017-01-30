@@ -39,6 +39,6 @@
     }
   },
   "dependencies": {
-    "electron-auto-updater": "^1.0.0"
+    "electron-osx-sign": "^0.4.3"
   }
 }
