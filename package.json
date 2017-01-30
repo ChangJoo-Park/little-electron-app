@@ -1,13 +1,13 @@
 {
-  "name": "electron-boilerplate",
-  "version": "1.0.0",
+  "name": "little-electron-app",
+  "version": "0.0.1",
   "description": "Boilerplate for electron with electron-builder",
   "main": "index.js",
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "build -mwl --x64 --ia32",
+    "dist": "build -mwl",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
