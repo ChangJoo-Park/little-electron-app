@@ -1,29 +1,43 @@
 {
   "name": "little-electron-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Boilerplate for electron with electron-builder",
   "main": "index.js",
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "build -mwl",
+    "clean": "rm -rf ./dist",
+    "dist": "npm run clean && build -mwl",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "ChangJoo Park <pcjpcj2@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "electron": "^1.4.15",
     "electron-builder": "^12.0.3"
   },
   "build": {
-    "appId": "your.id",
+    "appId": "app.little.electron",
+    "productName": "Little Electron App",
+    "publish": {
+      "provider": "github",
+      "owner": "changjoo-park",
+      "repo": "little-electron-app"
+    },
     "mac": {
       "category": "your.app.category.type"
     },
     "win": {
-      "iconUrl": "(windows-only) https link to icon"
+      "iconUrl": "(windows-only) https link to icon",
+      "publish": [
+        "github"
+      ],
+      "remoteReleases": "https://github.com/ChangJoo-Park/little-electron-app"
     }
+  },
+  "dependencies": {
+    "electron-auto-updater": "^1.0.0"
   }
 }
