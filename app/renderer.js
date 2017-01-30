@@ -1,3 +1,10 @@
+const electron = require('electron') // require('electron-auto-updater')
+const ipcRenderer = electron.ipcRenderer
+
+
+ipcRenderer.on('updater-message', (event, message) => {
+  console.log(message)
+})
 // // This file is required by the index.html file and will
 // // be executed in the renderer process for that window.
 // // All of the Node.js APIs are available in this process.
