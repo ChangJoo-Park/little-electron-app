@@ -1,0 +1,15 @@
+{
+  "name": "my-little-electron-app",
+  "version": "1.0.0",
+  "description": "description test",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron-updater": "^1.3.1"
+  }
+}
