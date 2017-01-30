@@ -9,6 +9,7 @@
     "dev": "NODE_ENV='development' npm run start",
     "clean": "rm -rf ./dist",
     "dist": "npm run clean && build -mwl",
+    "pack": "build -mwl --dir",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
