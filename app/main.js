@@ -6,10 +6,13 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
+const SECOND = 1000
+const MINUTE = 60 * SECOND
 
 let mainWindow
 let contents
-function createWindow() {
+let updateChecker
+function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600
@@ -22,16 +25,26 @@ function createWindow() {
   }))
   contents = mainWindow.webContents
   contents.openDevTools()
-  // Need setInterval for check
-  autoUpdater.checkForUpdates()
+  autoUpdater.checkForUpdates().then(function (result){
+    console.log(result)
+  })
+  updateChecker = setInterval(function () {
+    autoUpdater.checkForUpdates()
+  }, 5 * MINUTE) 
+}
+
+function beforeQuit () {
+  if (updateChecker) {
+    clearInterval(updateChecker)
+  }
 }
 
 app.on('ready', createWindow)
-// console.log(autoUpdater)
+app.on('before-quit', beforeQuit)
 
 autoUpdater.on('update-available', function () {
   console.log('A new update is available')
-  contents.send('updater-message', 'A new update is available')
+  contents.send('updater-message', 'A new update is available [current : ', process.env.npm_package_version ,' ]')
 })
 autoUpdater.on('checking-for-update', function () {
   console.log('Checking-for-update')
@@ -50,6 +63,7 @@ autoUpdater.on('update-downloaded', function (event) {
   console.log('update-downloaded')
   console.log(event)
   contents.send('updater-message', 'update-downloaded')
+  autoUpdater.quitAndInstall()
 })
 
 autoUpdater.on('update-not-available', function () {
